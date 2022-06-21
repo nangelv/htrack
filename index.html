@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            list-style:none;
+            padding: 0;
+            /* margin: 0; */
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <span onclick="addCigarette();storeState()"><span>🚬</span><span>Cigarette</span></span>
+        <span onclick="addCoffee();storeState()"><span>☕️</span><span>Coffee</span></span>
+        <span onclick="addSweets();storeState()"><span>🍪</span><span>Sweets</span></span>
+    </div>
+    <ul>
+    </ul>
+<button onclick="showCookies()">Show Cookies!</button>
+<div id="cookie_id">Cookies: </div>
+    <script>
+        var cookies = document.cookie.split(";");
+        for (var i=0; i < cookies.length; i++) {
+            if (cookies[i].split("=")[0] == "habit_store") {
+                var content = cookies[i].split("=")[1];
+                document.getElementsByTagName("ul")[0].innerHTML = decodeURIComponent(content);
+                break;
+            }
+        }
+        function addCigarette() {
+            var x = document.getElementsByTagName('ul')[0];
+            var newItem = document.createElement('li');
+            var today = new Date();
+            var hour = today.getHours();
+            if (hour < 10) {
+                hour = "0" + hour;
+            }
+            var minute = today.getMinutes();
+            if (minute < 10) {
+                minute = "0" + minute;
+            }
+
+            var time = hour + ":" + minute;
+            newItem.innerText = "🚬 Cigarette " + time;
+            x.appendChild(newItem);
+            console.log(x);
+        }
+        function addCoffee() {
+            var x = document.getElementsByTagName('ul')[0];
+            var newItem = document.createElement('li');
+            var today = new Date();
+            var hour = today.getHours();
+            if (hour < 10) {
+                hour = "0" + hour;
+            }
+            var minute = today.getMinutes();
+            if (minute < 10) {
+                minute = "0" + minute;
+            }
+            
+            var time = hour + ":" + minute;
+            newItem.innerText = "☕️ Coffee " + time;
+            x.appendChild(newItem);
+            console.log(x);
+        }
+        function addSweets() {
+            var x = document.getElementsByTagName('ul')[0];
+            var newItem = document.createElement('li');
+            var today = new Date();
+            var hour = today.getHours();
+            if (hour < 10) {
+                hour = "0" + hour;
+            }
+            var minute = today.getMinutes();
+            if (minute < 10) {
+                minute = "0" + minute;
+            }
+            
+            var time = hour + ":" + minute;
+            newItem.innerText = "🍪 Sweets " + time;
+            x.appendChild(newItem);
+            console.log(x);
+        }
+        function storeState() {
+            var state = document.getElementsByTagName("ul")[0].innerHTML;
+            document.cookie="habit_store=" + encodeURIComponent(state) + ";max-age=259200;" + "domain=" + window.location.hostname;
+        }
+        function showCookies() {
+            document.getElementById("cookie_id").innerText = "Cookies: " + document.cookie;
+        }
+    </script>
+</body>
+</html>
